@@ -1,0 +1,53 @@
+#!/bin/zsh -f
+# What Alfred UI runs on every keystroke: hands the line to calculingo for Mac
+# and prints the window it sends back. Starts the app, out of sight, when it
+# isn't running.
+
+tmp=${TMPDIR:-$(/usr/bin/getconf DARWIN_USER_TEMP_DIR)}
+sock=${tmp%/}/calculingo.sock
+app=app.calculingo.mac
+get=https://calculingo.app/features
+
+request=${(pj:\x1f:)@}
+request=${request//$'\n'/ }
+
+ask() { print -rn -- "$request"$'\n' | /usr/bin/nc -U "$sock" 2>/dev/null }
+
+json() { local s=${1//\\/\\\\}; s=${s//\"/\\\"}; print -rn -- "\"$s\"" }
+
+# A message in the answer's place, with a button when there is somewhere to go.
+say() {
+  local button=""
+  [[ -n ${3:-} ]] && button=',{"constraints":{"insets":{"left":5}},"id":"get","type":"button","bordered":true,'\
+'"text":'"$(json "$3")"',"events":[{"triggers":"actioned","action":{"type":"script","src":"scripts/calc","args":["get"]}}]}'
+  print -rn -- '{"replace":{"ids":{"answer":{"constraints":{"region":"top"},"id":"answer","type":"view",'\
+'"layout":"inline","direction":"vertical","spacing":8,"padding":20,"components":['\
+'{"constraints":{"stretch":"horizontal","size":{"height":30},"insets":{"left":5}},"id":"head",'\
+'"type":"label","colour":"labelColor","font":{"size":22,"weight":"semibold"},"linebreak":"truncatetail","text":'"$(json "$1")"'},'\
+'{"constraints":{"stretch":"horizontal","size":{"height":34}},"id":"body","type":"textarea","editable":false,'\
+'"selectable":false,"background":null,"bordertype":"none","colour":"secondaryLabelColor","font":{"size":13},'\
+'"textinsets":{"horizontal":0,"vertical":0},"text":'"$(json "$2")"'}'"$button"']}}},"update":{"relayout":true,"ids":{}}}'
+}
+
+# The button under "isn't installed".
+if [[ ${1:-} == get ]]; then
+  /usr/bin/open "$get"
+  print -rn -- '{"finish":{"variables":{"paste":"0"}}}'
+  exit 0
+fi
+
+reply=$(ask)
+if [[ -z $reply ]]; then
+  if ! /usr/bin/open -g -j -b $app --args --for-alfred 2>/dev/null; then
+    say "calculingo for Mac isn't installed" \
+      "The workflow gets its answers from the app, which is free to download." "Get calculingo for Mac"
+    exit 0
+  fi
+  for _ in {1..80}; do
+    /bin/sleep 0.05
+    reply=$(ask) && [[ -n $reply ]] && break
+  done
+  [[ -n $reply ]] || { say "calculingo is starting" "Keep typing and it answers in a moment."; exit 0 }
+fi
+
+print -rn -- "$reply"

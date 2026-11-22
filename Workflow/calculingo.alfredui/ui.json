@@ -1,0 +1,893 @@
+{
+  "bundleid": "app.calculingo.alfred.ui",
+  "iconpath": "../icon.png",
+  "variablesconfig": {
+    "query": {
+      "src": "args[0]",
+      "default": ""
+    }
+  },
+  "variables": {
+    "example": ""
+  },
+  "templates": {
+    "action": {
+      "type": "view",
+      "layout": "inline",
+      "spacing": 6,
+      "components": [
+        {
+          "constraints": {
+            "position": "centre"
+          },
+          "id": "{param:id}",
+          "type": "label",
+          "text": "{param:label}",
+          "colour": "secondaryLabelColor",
+          "font": {
+            "size": "small"
+          }
+        },
+        {
+          "constraints": {
+            "position": "centre"
+          },
+          "type": "view",
+          "layout": "stack",
+          "padding": 3,
+          "cornerradius": 4,
+          "background": "quaternaryLabelColor",
+          "components": [
+            {
+              "type": "label",
+              "text": "{param:key}",
+              "textalign": "centre",
+              "colour": "secondaryLabelColor",
+              "font": {
+                "size": "small",
+                "weight": "medium"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "window": {
+    "size": {
+      "width": 680,
+      "height": 440
+    },
+    "padding": 0,
+    "root": {
+      "type": "view",
+      "layout": "border",
+      "events": [
+        {
+          "triggers": "launched",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "start",
+              "{var:query}"
+            ],
+            "async": true
+          }
+        }
+      ],
+      "shortcuts": [
+        {
+          "shortcut": "↓",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "move",
+              "{value:search.text}",
+              "down",
+              "{value:list.selected.index}"
+            ]
+          }
+        },
+        {
+          "shortcut": "↑",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "move",
+              "{value:search.text}",
+              "up",
+              "{value:list.selected.index}"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌃n",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "move",
+              "{value:search.text}",
+              "down",
+              "{value:list.selected.index}"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌃p",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "move",
+              "{value:search.text}",
+              "up",
+              "{value:list.selected.index}"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌃j",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "move",
+              "{value:search.text}",
+              "down",
+              "{value:list.selected.index}"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌃k",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "move",
+              "{value:search.text}",
+              "up",
+              "{value:list.selected.index}"
+            ]
+          }
+        },
+        {
+          "shortcut": "⇥",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "fill",
+              "{value:search.text}",
+              "{value:list.selected.line}",
+              "{var:example}"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘↩",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "commit",
+              "{value:search.text}",
+              "{value:list.selected.line}",
+              "paste"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘⇧C",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "commit",
+              "{value:search.text}",
+              "{value:list.selected.line}",
+              "stay"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘⌫",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "clearhistory",
+              "{value:search.text}"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘⇧⌫",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "forget",
+              "{value:search.text}",
+              "{value:list.selected.line}",
+              "{value:list.selected.kind}"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘o",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "web",
+              "{value:search.text}",
+              "{value:list.selected.line}"
+            ]
+          }
+        },
+        {
+          "shortcut": "⎋",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "escape",
+              "{value:search.text}",
+              "{value:list.selected.line}"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘1",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "pick",
+              "{value:search.text}",
+              "1"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘2",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "pick",
+              "{value:search.text}",
+              "2"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘3",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "pick",
+              "{value:search.text}",
+              "3"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘4",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "pick",
+              "{value:search.text}",
+              "4"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘5",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "pick",
+              "{value:search.text}",
+              "5"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘6",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "pick",
+              "{value:search.text}",
+              "6"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘7",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "pick",
+              "{value:search.text}",
+              "7"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘8",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "pick",
+              "{value:search.text}",
+              "8"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘9",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "pick",
+              "{value:search.text}",
+              "9"
+            ]
+          }
+        },
+        {
+          "shortcut": "⌘O",
+          "action": {
+            "type": "script",
+            "src": "scripts/calc",
+            "args": [
+              "web",
+              "{value:search.text}",
+              "{value:list.selected.line}"
+            ]
+          }
+        }
+      ],
+      "components": [
+        {
+          "constraints": {
+            "region": "top"
+          },
+          "type": "view",
+          "layout": "inline",
+          "direction": "vertical",
+          "components": [
+            {
+              "constraints": {
+                "stretch": "horizontal"
+              },
+              "type": "view",
+              "layout": "border",
+              "spacing": 12,
+              "padding": 16,
+              "components": [
+                {
+                  "constraints": {
+                    "region": "left",
+                    "position": "centre",
+                    "size": 20
+                  },
+                  "type": "imageview",
+                  "image": {
+                    "type": "symbol",
+                    "src": "plus.forwardslash.minus"
+                  },
+                  "contenttintcolour": "tertiaryLabelColor"
+                },
+                {
+                  "constraints": {
+                    "region": "centre"
+                  },
+                  "id": "search",
+                  "type": "textfield",
+                  "text": "{var:query}",
+                  "placeholder": "Ask in plain words",
+                  "placeholdercolour": "tertiaryLabelColor",
+                  "bordered": false,
+                  "background": null,
+                  "focus": true,
+                  "focusring": false,
+                  "font": {
+                    "size": 22
+                  },
+                  "events": [
+                    {
+                      "triggers": "changed",
+                      "action": {
+                        "type": "script",
+                        "src": "scripts/calc",
+                        "args": [
+                          "eval",
+                          "{value:search.text}"
+                        ]
+                      }
+                    },
+                    {
+                      "triggers": "typingstopped",
+                      "action": {
+                        "type": "script",
+                        "src": "scripts/calc",
+                        "args": [
+                          "settle",
+                          "{value:search.text}"
+                        ],
+                        "async": true
+                      }
+                    },
+                    {
+                      "triggers": "actioned",
+                      "action": {
+                        "type": "script",
+                        "src": "scripts/calc",
+                        "args": [
+                          "commit",
+                          "{value:search.text}",
+                          "{value:list.selected.line}",
+                          "copy"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "constraints": {
+                "stretch": "horizontal",
+                "size": {
+                  "height": 1
+                }
+              },
+              "type": "view",
+              "layout": "stack",
+              "background": "separatorColor"
+            }
+          ]
+        },
+        {
+          "constraints": {
+            "region": "centre"
+          },
+          "type": "view",
+          "layout": "border",
+          "components": [
+            {
+              "constraints": {
+                "region": "top",
+                "size": {
+                  "height": 0
+                }
+              },
+              "id": "answer",
+              "type": "view",
+              "layout": "stack"
+            },
+            {
+              "constraints": {
+                "region": "centre"
+              },
+              "type": "view",
+              "layout": "border",
+              "spacing": 2,
+              "padding": 8,
+              "components": [
+                {
+                  "constraints": {
+                    "region": "centre"
+                  },
+                  "id": "list",
+                  "type": "dataview",
+                  "behaviour": {
+                    "selection": {
+                      "allowempty": true
+                    }
+                  },
+                  "events": [
+                    {
+                      "triggers": "changed",
+                      "action": {
+                        "type": "script",
+                        "src": "scripts/calc",
+                        "args": [
+                          "hint",
+                          "{value:search.text}",
+                          "{value:self.selected.line}"
+                        ]
+                      }
+                    }
+                  ],
+                  "cell": {
+                    "height": 34,
+                    "init": {
+                      "row.background": null,
+                      "rowTitle.colour": "labelColor",
+                      "rowSub.colour": "secondaryLabelColor",
+                      "rowIcon.contenttintcolour": "tertiaryLabelColor",
+                      "rowKey.colour": "tertiaryLabelColor"
+                    },
+                    "selected": {
+                      "row.background": "alfredSelectedResultBackgroundColor",
+                      "rowTitle.colour": "alfredSelectedResultTextColor",
+                      "rowSub.colour": "alfredSelectedResultTextColor",
+                      "rowIcon.contenttintcolour": "alfredSelectedResultTextColor",
+                      "rowKey.colour": "alfredSelectedResultTextColor"
+                    },
+                    "root": {
+                      "id": "row",
+                      "type": "view",
+                      "layout": "border",
+                      "padding": 8,
+                      "spacing": 10,
+                      "cornerradius": 8,
+                      "events": [
+                        {
+                          "triggers": "doubleclicked",
+                          "action": {
+                            "type": "script",
+                            "src": "scripts/calc",
+                            "args": [
+                              "fill",
+                              "{value:search.text}",
+                              "{data:line}"
+                            ]
+                          }
+                        }
+                      ],
+                      "components": [
+                        {
+                          "constraints": {
+                            "region": "left",
+                            "position": "centre",
+                            "size": 16
+                          },
+                          "id": "rowIcon",
+                          "type": "imageview",
+                          "image": {
+                            "type": "symbol",
+                            "src": "clock.arrow.circlepath"
+                          }
+                        },
+                        {
+                          "constraints": {
+                            "region": "centre",
+                            "position": "left",
+                            "stretch": "horizontal"
+                          },
+                          "id": "rowTitle",
+                          "type": "label",
+                          "linebreak": "truncatetail"
+                        },
+                        {
+                          "constraints": {
+                            "region": "right",
+                            "position": "centre"
+                          },
+                          "type": "view",
+                          "layout": "inline",
+                          "spacing": 12,
+                          "components": [
+                            {
+                              "constraints": {
+                                "position": "centre",
+                                "size": {
+                                  "width": 230
+                                }
+                              },
+                              "id": "rowSub",
+                              "type": "label",
+                              "textalign": "right",
+                              "linebreak": "truncatetail"
+                            },
+                            {
+                              "constraints": {
+                                "position": "centre",
+                                "size": {
+                                  "width": 22
+                                }
+                              },
+                              "id": "rowKey",
+                              "type": "label",
+                              "textalign": "right",
+                              "font": {
+                                "size": "small"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "data": {
+                    "type": "basic",
+                    "src": []
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "constraints": {
+            "region": "bottom"
+          },
+          "type": "view",
+          "layout": "inline",
+          "direction": "vertical",
+          "components": [
+            {
+              "constraints": {
+                "stretch": "horizontal",
+                "size": {
+                  "height": 1
+                }
+              },
+              "type": "view",
+              "layout": "stack",
+              "background": "separatorColor"
+            },
+            {
+              "constraints": {
+                "stretch": "horizontal"
+              },
+              "type": "view",
+              "layout": "border",
+              "padding": 10,
+              "background": {
+                "light": "#00000005",
+                "dark": "#ffffff06"
+              },
+              "components": [
+                {
+                  "constraints": {
+                    "region": "left",
+                    "position": "centre",
+                    "insets": {
+                      "left": 6
+                    }
+                  },
+                  "type": "view",
+                  "layout": "inline",
+                  "spacing": 8,
+                  "components": [
+                    {
+                      "constraints": {
+                        "position": "centre",
+                        "size": 16
+                      },
+                      "type": "imageview",
+                      "image": {
+                        "type": "file",
+                        "src": "../icon.png"
+                      }
+                    },
+                    {
+                      "constraints": {
+                        "position": "centre"
+                      },
+                      "id": "status",
+                      "type": "label",
+                      "text": "calculingo",
+                      "colour": "secondaryLabelColor",
+                      "font": {
+                        "size": "small",
+                        "weight": "medium"
+                      },
+                      "linebreak": "truncatetail"
+                    }
+                  ]
+                },
+                {
+                  "constraints": {
+                    "region": "right",
+                    "position": "centre",
+                    "insets": {
+                      "right": 6
+                    }
+                  },
+                  "type": "view",
+                  "layout": "inline",
+                  "spacing": 18,
+                  "components": [
+                    {
+                      "constraints": {
+                        "position": "centre",
+                        "size": {
+                          "width": 1,
+                          "height": 1
+                        }
+                      },
+                      "id": "rightFill",
+                      "type": "button",
+                      "text": "",
+                      "bordered": false,
+                      "opacity": 0,
+                      "enabled": false,
+                      "shortcut": "→",
+                      "events": [
+                        {
+                          "triggers": "actioned",
+                          "action": {
+                            "type": "script",
+                            "src": "scripts/calc",
+                            "args": [
+                              "fill",
+                              "{value:search.text}",
+                              "{value:list.selected.line}",
+                              "{var:example}"
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "template",
+                      "src": "action",
+                      "params": {
+                        "id": "enterHint",
+                        "label": "Copy",
+                        "key": "↩"
+                      }
+                    },
+                    {
+                      "type": "template",
+                      "src": "action",
+                      "params": {
+                        "id": "pasteHint",
+                        "label": "Paste",
+                        "key": "⌘↩"
+                      }
+                    },
+                    {
+                      "type": "template",
+                      "src": "action",
+                      "params": {
+                        "id": "fillHint",
+                        "label": "Fill",
+                        "key": "⇥"
+                      }
+                    },
+                    {
+                      "type": "view",
+                      "layout": "inline",
+                      "spacing": 6,
+                      "components": [
+                        {
+                          "constraints": {
+                            "position": "centre"
+                          },
+                          "id": "openWeb",
+                          "type": "button",
+                          "text": "Open in Browser",
+                          "bordered": false,
+                          "font": {
+                            "size": "small"
+                          },
+                          "contenttintcolour": "secondaryLabelColor",
+                          "enabled": true,
+                          "tooltip": "Ask this on calculingo.app",
+                          "events": [
+                            {
+                              "triggers": "actioned",
+                              "action": {
+                                "type": "script",
+                                "src": "scripts/calc",
+                                "args": [
+                                  "web",
+                                  "{value:search.text}",
+                                  "{value:list.selected.line}"
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "constraints": {
+                            "position": "centre"
+                          },
+                          "type": "view",
+                          "layout": "stack",
+                          "padding": 3,
+                          "cornerradius": 4,
+                          "background": "quaternaryLabelColor",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "⌘O",
+                              "textalign": "centre",
+                              "colour": "secondaryLabelColor",
+                              "font": {
+                                "size": "small",
+                                "weight": "medium"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "view",
+                      "layout": "inline",
+                      "spacing": 6,
+                      "components": [
+                        {
+                          "constraints": {
+                            "position": "centre"
+                          },
+                          "id": "clearHistory",
+                          "type": "button",
+                          "text": "Clear History",
+                          "bordered": false,
+                          "font": {
+                            "size": "small"
+                          },
+                          "contenttintcolour": "secondaryLabelColor",
+                          "enabled": false,
+                          "tooltip": "Forget every question asked here",
+                          "events": [
+                            {
+                              "triggers": "actioned",
+                              "action": {
+                                "type": "script",
+                                "src": "scripts/calc",
+                                "args": [
+                                  "clearhistory",
+                                  "{value:search.text}"
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "constraints": {
+                            "position": "centre"
+                          },
+                          "type": "view",
+                          "layout": "stack",
+                          "padding": 3,
+                          "cornerradius": 4,
+                          "background": "quaternaryLabelColor",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "⌘⌫",
+                              "textalign": "centre",
+                              "colour": "secondaryLabelColor",
+                              "font": {
+                                "size": "small",
+                                "weight": "medium"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
